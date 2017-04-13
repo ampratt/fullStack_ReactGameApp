@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-router
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add styled-components
 
 PATH: 
   C:\Program Files\ImageMagick-7.0.3-Q16;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\Brackets\command;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Program Files (x86)\Yarn\node_modules\.bin;C:\Ruby22\bin;C:\Users\Aaron\AppData\Local\Microsoft\WindowsApps;C:\Users\Aaron\AppData\Local\atom\bin;C:\Users\Aaron\AppData\Roaming\npm;C:\Program Files\Heroku\bin;C:\Users\Aaron\AppData\Local\Yarn\.bin
@@ -17,7 +17,7 @@ npm manifest:
   {
     "name": "tictactoe",
     "version": "0.1.0",
-    "private": true,
+    "private": false,
     "devDependencies": {
       "autoprefixer": "6.5.1",
       "babel-core": "6.17.0",
@@ -64,8 +64,11 @@ npm manifest:
       "whatwg-fetch": "1.0.0"
     },
     "dependencies": {
+      "material-ui": "^0.17.3",
       "react": "^15.4.2",
-      "react-dom": "^15.4.2"
+      "react-dom": "^15.4.2",
+      "react-router": "^3.0.0",
+      "react-tap-event-plugin": "^2.0.1"
     },
     "scripts": {
       "start": "node scripts/start.js",
@@ -97,7 +100,9 @@ npm manifest:
       }
     },
     "babel": {
-      "plugins": ["react-relay"],
+      "plugins": [
+        "react-relay"
+      ],
       "presets": [
         "react-app"
       ]
