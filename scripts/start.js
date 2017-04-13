@@ -276,7 +276,7 @@ function runDevServer(host, port, protocol) {
     console.log();
 
     if (isInteractive) {
-      openBrowser(protocol + '://' + host + ':' + port + '/');
+      // openBrowser(protocol + '://' + host + ':' + port + '/');
     }
   });
 }
