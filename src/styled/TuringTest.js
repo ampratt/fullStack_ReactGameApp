@@ -43,11 +43,11 @@ const TuringTest = (props) => {
       <Answers>
         <RaisedButton
           label={'Human'}
-          onTouchTap={()=>{props.recordGame('HUMAN')}}
+          onTouchTap={() => {props.recordGame('HUMAN')}}
         />
         <RaisedButton
           label={'Robot'}
-          onTouchTap={()=>{props.recordGame('ROBOT')}}
+          onTouchTap={() => {props.recordGame('ROBOT')}}
         />
       </Answers>
     </Container>
