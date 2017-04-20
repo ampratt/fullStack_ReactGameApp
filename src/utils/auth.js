@@ -1,7 +1,10 @@
 import Auth0Lock from 'auth0-lock'
-
+import Relay from 'react-relay'
+import CreateUser from '../mutations/CreateUser'
+import SigninUser from '../mutations/SigninUser'
 const authDomain = 'aaronpratt.eu.auth0.com'
 const clientId = 'rNLmmfAmRIIQ8Oow6zY7lkv5NcebaSRo'
+
 
 class AuthService {
 	constructor() {
@@ -73,6 +76,48 @@ class AuthService {
 		this.removeTokens()
 		location.reload()
 	}
+
+
+	createUser = (authFields) => {
+		return new Promise( (resolve, reject) => {
+			// specifiy mutation to make
+			Relay.Store.commitUpdate(
+				// pass props to function
+				new CreateUser({
+					email: authFields.email,
+					idToken: authFields.idToken
+				}), {
+					onSuccess: (response) => {
+						this.signingUser(authFields)
+						resolve(response)
+					},
+					onFailure: (response) => {
+						console.log('CreateUser eror', response)
+						reject(response)
+					}
+				}
+			) // Relay.Store.commitUpdate
+		}) // Promise 
+	}
+
+	signingUser = (authFields) => {
+		return new Promise( (resolve, reject) => {
+			Relay.Store.commitUpdate(
+				new SigninUser({
+					idToken: authFields.idToken
+				}), {
+					onSuccess: (response) => {
+						this.setToken(authFields)
+						resolve(response)
+					},
+					onFailure: (response) => {
+						reject(response)
+					}
+				}
+			) // Relay.Store.commitUpdate
+		}) // Promise
+	}
+
 }
 
 const auth = new AuthService()
