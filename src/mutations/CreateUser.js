@@ -3,10 +3,10 @@ import Relay from 'react-relay'
 export default class CreateUser extends Relay.Mutation {
 
 	// prepare data that will be sent as input arguments in the GraphQL mutation
+	// graph.cool auth schema expects this
 	getVariables() {
 		return {
 			email: this.props.email,
-			// graph.cool auth schema expects this
 			authProvider: {
 				auth0: {
 					idToken: this.props.idToken
@@ -16,12 +16,12 @@ export default class CreateUser extends Relay.Mutation {
 	}
 
 	// GraphQL mutation that we want to use
-	getMutation() {
-		return Relay.QL`mutation{createUser}` // mutation provided by graphQL
+	getMutation () {
+		return Relay.QL`mutation{createUser}`
 	}
 
 	// read any changed data from Store
-	getFatQuery() {
+	getFatQuery () {
 		return Relay.QL`
 			fragment on CreateUserPayload {
 				user

@@ -143,7 +143,6 @@ class TicTacToe extends Component {
         })
       )
     }
-
     // reset game after finished
     // this.resetGame()
     this.setState({
@@ -211,4 +210,3 @@ export default Relay.createContainer(
     }
   }
 )
-// export default TicTacToe

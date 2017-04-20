@@ -11,9 +11,9 @@ const StayVisible = styled.div`
 	transition: margin .2s;
 `
 
+// remember to pass the props to the component to use
 export const NavToggleButton = (props) => {
 	return (
-		// remember to pass the props to the component to use
 		<StayVisible 
 			{...props} 
 		>

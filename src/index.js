@@ -14,7 +14,7 @@ const createHeaders = () => {
 	let idToken = auth.getToken()
 	if (idToken) {
 		return {
-			Authorization: `Bearer ${idToken}`
+		  'Authorization': `Bearer ${idToken}`
 		}
 	} else {
 		return {}
@@ -36,12 +36,13 @@ Relay.injectNetworkLayer(
 	],{ disableBatchQuery: true })
 )
 
-
+// relay works off Flux state management
+// allows nice, pretty url and browser back/forward button
 ReactDOM.render(
   <Router
-  	environment={Relay.Store} 	// relay work off Flux state management
+  	environment={Relay.Store} 	
   	render={applyRouterMiddleware(useRelay)}
-  	history={browserHistory} 	// allows nice, pretty url and browser back/forward button
+  	history={browserHistory} 	
   	routes={Routes}
   />,
   document.getElementById('root')

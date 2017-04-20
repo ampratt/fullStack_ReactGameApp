@@ -5,7 +5,6 @@ export default class SigninUser extends Relay.Mutation {
 	// prepare data that will be sent as input arguments in the GraphQL mutation
 	getVariables() {
 		return {
-			// specifiy id token on sign-in
 			auth0: {
 				idToken: this.props.idToken
 			}
@@ -13,12 +12,12 @@ export default class SigninUser extends Relay.Mutation {
 	}
 
 	// GraphQL mutation that we want to use
-	getMutation() {
-		return Relay.QL`mutation{signinUser}` // mutation provided by graphQL
+	getMutation () {
+		return Relay.QL`mutation{signinUser}`
 	}
 
 	// read any changed data from Store
-	getFatQuery() {
+	getFatQuery () {
 		return Relay.QL`
 			fragment on SigninPayload {
 				viewer

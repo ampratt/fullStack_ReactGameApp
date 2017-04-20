@@ -32,17 +32,15 @@ class Template extends Component {
 // 1) component to be attached
 // 2) obj to specifiy which fragments to be provided to Template
 export default Relay.createContainer(
-	Template, {
-		fragments: {
-			viewer: () => Relay.QL`
-				fragment on Viewer {
-					user {
-						id
-					}
-				}
-			`,
-		}
-	}
+  Template, {
+    fragments: {
+      viewer: () => Relay.QL`
+        fragment on Viewer {
+          user {
+            id
+          }
+        }
+      `,
+    }
+  }
 )
-
-// export default Template
