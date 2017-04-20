@@ -4,6 +4,7 @@ import Template from '../containers/Template'
 import TicTacToe from '../containers/TicTacToe'
 import Profile from '../containers/Profile'
 import Relay from 'react-relay'
+import auth from '../utils/auth'
 
 // each route needs access to route 'viewer' from relay api
 const ViewerQueries = {
@@ -16,6 +17,7 @@ const createRoutes = () => {
 			path='/' 
 			component={Template}
 			queries={ViewerQueries} // each route needs acces to ViewerQueries
+			auth={auth}
 		>
 			<IndexRoute 
 				component={TicTacToe} 

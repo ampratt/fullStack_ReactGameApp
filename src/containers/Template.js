@@ -12,7 +12,10 @@ class Template extends Component {
 		return(
 			<MuiThemeProvider>
 				<div>
-					<NavDrawer/>
+					<NavDrawer
+						auth={this.props.route.auth}	// access props from parent route
+						authenticated={this.props.viewer.user}	// passes true or null
+					/>
 					<Header>
 						TicTacToe
 					</Header>

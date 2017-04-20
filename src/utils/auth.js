@@ -25,7 +25,25 @@ class AuthService {
 	}
 
 	authProcess = (authResult) => {
-		console.log(authResult)
+		let { email, exp } = authResult.idTokenPayload
+		const idToken = authResult.idToken
+
+		this.signinUser({
+			idToken,
+			email,
+			exp
+		}).then(
+			success => success,	// on success just sign-in
+			rejected => {		// on failure, probably no user exists...create one
+				this.createUser({
+					idToken,
+					email,
+					exp
+				}).then()
+			}
+		)
+
+		// console.log(authResult)
 	}
 
 	showLock() {
@@ -88,7 +106,7 @@ class AuthService {
 					idToken: authFields.idToken
 				}), {
 					onSuccess: (response) => {
-						this.signingUser(authFields)
+						this.signinUser(authFields)
 						resolve(response)
 					},
 					onFailure: (response) => {
@@ -100,7 +118,7 @@ class AuthService {
 		}) // Promise 
 	}
 
-	signingUser = (authFields) => {
+	signinUser = (authFields) => {
 		return new Promise( (resolve, reject) => {
 			Relay.Store.commitUpdate(
 				new SigninUser({
