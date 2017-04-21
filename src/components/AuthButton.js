@@ -5,7 +5,7 @@ const AuthButton = (props) => {
 	// look 2 different ways dependent on logged in status
 	if (props.authenticated) {
 		return (
-			<RaisedButton 
+			<RaisedButton
 				label='Logout'
 				onTouchTap={props.auth.logout}
 				fullWidth={true}
@@ -22,8 +22,6 @@ const AuthButton = (props) => {
 			/>
 		)
 	}
-
 }
-
 
 export default AuthButton

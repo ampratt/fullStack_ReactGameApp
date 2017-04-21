@@ -1,4 +1,4 @@
-import { css } from 'styled-components' //allows use of media queries
+import {css} from 'styled-components'
 
 export const media = {
 	// if width is smaller than 800, use handheld

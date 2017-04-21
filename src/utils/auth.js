@@ -1,10 +1,11 @@
 import Auth0Lock from 'auth0-lock'
 import Relay from 'react-relay'
+// const authDomain = 'carlpeaslee.auth0.com'
+// const clientId = 'kpcjF5KAIOOGe2Sm4n4NnPFjFhg9YwPI'
 import CreateUser from '../mutations/CreateUser'
 import SigninUser from '../mutations/SigninUser'
 const authDomain = 'aaronpratt.eu.auth0.com'
 const clientId = 'rNLmmfAmRIIQ8Oow6zY7lkv5NcebaSRo'
-
 
 class AuthService {
 	constructor() {
@@ -21,11 +22,13 @@ class AuthService {
 
 		// Listen for the authenticated event and get profile
 		this.lock.on('authenticated', this.authProcess.bind(this))
-
 	}
 
 	authProcess = (authResult) => {
-		let { email, exp } = authResult.idTokenPayload
+		let {
+			email,
+			exp
+		} = authResult.idTokenPayload
 		const idToken = authResult.idToken
 
 		this.signinUser({
@@ -33,8 +36,8 @@ class AuthService {
 			email,
 			exp
 		}).then(
-			success => success,	// on success just sign-in
-			rejected => {		// on failure, probably no user exists...create one
+			success => success,
+			rejected => {
 				this.createUser({
 					idToken,
 					email,
@@ -43,7 +46,6 @@ class AuthService {
 			}
 		)
 
-		// console.log(authResult)
 	}
 
 	showLock() {
@@ -52,22 +54,24 @@ class AuthService {
 
 	// take auth token and add to local storage
 	setToken = (authFields) => {
-		let { idToken, exp } = authFields
+		let {
+			idToken,
+			exp
+		} = authFields
 		localStorage.setItem('idToken', idToken)
 		localStorage.setItem('exp', exp * 1000)
 	}
 
 	// graph.cool won't accept expired tokens
-	isTokenCurrent = () => {
+	isCurrent = () => {
 		let expString = localStorage.getItem('exp')
 		if (!expString) {
-			// if no exp item, then make sure no id token exists
 			localStorage.removeItem('idToken')
 			return false
 		}
 		let now = new Date()
-		let exp = new Date(parseInt(expString, 10)) // 10 is radix parameter
-		if (exp < now) {
+		let exp = new Date(parseInt(expString, 10)) //10 is radix parameter
+		if ( exp < now ) {
 			this.logout()
 			return false
 		} else {
@@ -75,26 +79,23 @@ class AuthService {
 		}
 	}
 
-	removeTokens = () => {
-		localStorage.removeItem('idToken')
-		localStorage.removeItem('exp')
-	}
-
-	getToken = () => {
+	getToken() {
 		let idToken = localStorage.getItem('idToken')
-		if (this.isTokenCurrent() && idToken) {
+		// if no exp item, then make sure no id token exists
+		if (this.isCurrent() && idToken) {
 			return idToken
 		} else {
-			this.removeTokens()
+			localStorage.removeItem('idToken')
+			localStorage.removeItem('exp')
 			return false
 		}
 	}
 
 	logout = () => {
-		this.removeTokens()
+		localStorage.removeItem('idToken')
+		localStorage.removeItem('exp')
 		location.reload()
 	}
-
 
 	createUser = (authFields) => {
 		return new Promise( (resolve, reject) => {
@@ -110,12 +111,12 @@ class AuthService {
 						resolve(response)
 					},
 					onFailure: (response) => {
-						console.log('CreateUser eror', response)
+						console.log('CreateUser error', response)
 						reject(response)
 					}
 				}
-			) // Relay.Store.commitUpdate
-		}) // Promise 
+			)	// Relay.Store.commitUpdate
+		})	// Promise
 	}
 
 	signinUser = (authFields) => {
@@ -132,8 +133,8 @@ class AuthService {
 						reject(response)
 					}
 				}
-			) // Relay.Store.commitUpdate
-		}) // Promise
+			)
+		})
 	}
 
 }

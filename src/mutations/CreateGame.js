@@ -5,8 +5,6 @@ export default class CreateGame extends Relay.Mutation {
 	// prepare data that will be sent as input arguments in the GraphQL mutation
 	getVariables() {
 		return {
-			// p1player: this.props.p1player,
-			// winner: this.props.winner,
 			p1playerId: this.props.user.id,
 			winnerId: this.props.winnerId,
 			p1Guess: this.props.guess,
@@ -15,12 +13,12 @@ export default class CreateGame extends Relay.Mutation {
 	}
 
 	// GraphQL mutation that we want to use
-	getMutation() {
-		return Relay.QL`mutation{createGame}` // mutation provided by graphQL
+	getMutation () {
+		return Relay.QL`mutation{createGame}`
 	}
 
 	// read any changed data from Store
-	getFatQuery() {
+	getFatQuery () {
 		return Relay.QL`
 			fragment on CreateGamePayload {
 				p1player

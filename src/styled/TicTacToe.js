@@ -18,7 +18,7 @@ export const Board = ({unit, size, rows}) => {
 				key={i+'v'}
 			/>
 		)
-		// horizontal lines
+		// horizontal line
 		grid.push(
 			<Line
 				points={[0, position, size, position]}

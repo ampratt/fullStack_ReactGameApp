@@ -45,7 +45,7 @@ class TicTacToe extends Component {
       }
     }
 
-	// syntax: object initializer shorthand
+    // syntax: object initializer shorthand
     this.setState({
       size,
       rows,
@@ -129,7 +129,7 @@ class TicTacToe extends Component {
 
   recordGame = (guess) => {
     let { user } = this.props.viewer
-    let { relay } = this.props      // relay passed to props through router
+    let { relay } = this.props        // relay passed to props through router
     let { winner, ownMark} = this.state
     if (user) {
       let winnerId = (winner === ownMark) ? user.id : undefined
@@ -145,14 +145,14 @@ class TicTacToe extends Component {
     }
 
     // reset game after finished
-    // this.resetGame()
-    this.setState({
-      gameState: new Array(9).fill(false),
-      gameOver: false,
-      yourTurn: true,
-      winner: false,
-      win: false
-    })
+    this.resetGame()
+    // this.setState({
+    //   gameState: new Array(9).fill(false),
+    //   gameOver: false,
+    //   yourTurn: true,
+    //   winner: false,
+    //   win: false
+    // })
   }
 
   render() {
@@ -195,9 +195,6 @@ class TicTacToe extends Component {
   }
 }
 
-// args:
-// 1) component to be attached
-// 2) obj to specifiy which fragments to be provided to Template
 export default Relay.createContainer(
   TicTacToe, {
     fragments: {
@@ -211,4 +208,3 @@ export default Relay.createContainer(
     }
   }
 )
-// export default TicTacToe
