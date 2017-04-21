@@ -19,6 +19,7 @@ other notable libraries required include:
 1. download repo to local disk
 2. navigate to dir location and install dependencies with npm or yarn: `yarn install`
 3. depending on your OS, GRAPHQL variable needs to be set in package.json:
+
 OSX ->   
 ```
 "scripts": {
@@ -31,7 +32,9 @@ Windows ->
     "start": "set GRAPHQL_ENDPOINT=https://api.graph.cool/relay/v1/cj1g151verr2901094koja161&&node scripts/start.js",
     "build": "set GRAPHQL_ENDPOINT=https://api.graph.cool/relay/v1/cj1g151verr2901094koja161&&node scripts/build.js",
 ```
+
 **Note: you can change this variable to you own api url as well.**
+
 4. run dev server with `yarn start`
 
 
